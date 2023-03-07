@@ -1,2 +1,4 @@
 # MPS-Practica2
-Creado por Javier Leiva Dueñas y Pablo Fernándes Serrano
+### Contribuyentes:
+- Javier Leiva Dueñas
+- Pablo Fernández Serrano
