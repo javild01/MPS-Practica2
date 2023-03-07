@@ -5,6 +5,9 @@ package org.mps.deque;
  * insertion, retrieval and removal at both ends.
  *
  * @param <T> the type of elements held in this deque
+ *
+ * @author Javier Leiva Dueñas
+ * @author Pablo Fernández Serrano
  */
 public interface DoubleEndedQueue<T> {
     // Basic operations
