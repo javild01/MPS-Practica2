@@ -54,30 +54,30 @@ public class DoublyLinkedListDequeTest {
         // Test inserting elements at the beginning of the deque
         @Test
         void prependValue() {
-            Double expectedValue1 = 12.7;
-            Double expectedValue2 = 83.9;
-            doublyLinkedListDeque.prepend(expectedValue2);
-            doublyLinkedListDeque.prepend(expectedValue1);
-            Double obtainedValue1 = (Double) doublyLinkedListDeque.first();
-            Double obtainedValue2 = (Double) doublyLinkedListDeque.last();
+            Double expectedFirstValue = 12.7;
+            Double expectedLastValue = 83.9;
+            doublyLinkedListDeque.prepend(expectedLastValue);
+            doublyLinkedListDeque.prepend(expectedFirstValue);
+            Double obtainedFirstValue = (Double) doublyLinkedListDeque.first();
+            Double obtainedLastValue = (Double) doublyLinkedListDeque.last();
             Integer size = doublyLinkedListDeque.size();
-            assertEquals(expectedValue1, obtainedValue1);
-            assertEquals(expectedValue2, obtainedValue2);
+            assertEquals(expectedFirstValue, obtainedFirstValue);
+            assertEquals(expectedLastValue, obtainedLastValue);
             assertEquals(2, size);
         }
 
         // Test inserting elements at the end of the deque
         @Test
         void appendValue() {
-            Double expectedValue1 = 12.7;
-            Double expectedValue2 = 83.9;
-            doublyLinkedListDeque.append(expectedValue1);
-            doublyLinkedListDeque.append(expectedValue2);
-            Double obtainedValue2 = (Double) doublyLinkedListDeque.last();
-            Double obtainedValue1 = (Double) doublyLinkedListDeque.first();
+            Double expectedFirstValue = 12.7;
+            Double expectedLastValue = 83.9;
+            doublyLinkedListDeque.append(expectedFirstValue);
+            doublyLinkedListDeque.append(expectedLastValue);
+            Double obtainedLastValue = (Double) doublyLinkedListDeque.last();
+            Double obtainedFirstValue = (Double) doublyLinkedListDeque.first();
             Integer size = doublyLinkedListDeque.size();
-            assertEquals(expectedValue1, obtainedValue1);
-            assertEquals(expectedValue2, obtainedValue2);
+            assertEquals(expectedFirstValue, obtainedFirstValue);
+            assertEquals(expectedLastValue, obtainedLastValue);
             assertEquals(2, size);
         }
 
@@ -86,11 +86,11 @@ public class DoublyLinkedListDequeTest {
         void prependValueWithOneValuePrepended() {
             Double expectedValue = 12.7;
             doublyLinkedListDeque.prepend(expectedValue);
-            Double obtainedValue1 = (Double) doublyLinkedListDeque.first();
-            Double obtainedValue2 = (Double) doublyLinkedListDeque.last();
+            Double obtainedFirstValue = (Double) doublyLinkedListDeque.first();
+            Double obtainedLastValue = (Double) doublyLinkedListDeque.last();
             Integer size = doublyLinkedListDeque.size();
-            assertEquals(expectedValue, obtainedValue1);
-            assertEquals(expectedValue, obtainedValue2);
+            assertEquals(expectedValue, obtainedFirstValue);
+            assertEquals(expectedValue, obtainedLastValue);
             assertEquals(1, size);
         }
 
@@ -99,11 +99,11 @@ public class DoublyLinkedListDequeTest {
         void appendValueWithOneValueAppended() {
             Double expectedValue = 12.7;
             doublyLinkedListDeque.append(expectedValue);
-            Double obtainedValue1 = (Double) doublyLinkedListDeque.last();
-            Double obtainedValue2 = (Double) doublyLinkedListDeque.first();
+            Double obtainedLastValue = (Double) doublyLinkedListDeque.last();
+            Double obtainedFirstValue = (Double) doublyLinkedListDeque.first();
             Integer size = doublyLinkedListDeque.size();
-            assertEquals(expectedValue, obtainedValue1);
-            assertEquals(expectedValue, obtainedValue2);
+            assertEquals(expectedValue, obtainedLastValue);
+            assertEquals(expectedValue, obtainedFirstValue);
             assertEquals(1, size);
         }
 
@@ -135,7 +135,6 @@ public class DoublyLinkedListDequeTest {
                 doublyLinkedListDeque.append(expectedValue);
                 doublyLinkedListDeque.append(8.9);
                 doublyLinkedListDeque.append(89);
-                System.out.println(doublyLinkedListDeque.first());
                 doublyLinkedListDeque.deleteFirst();
                 Double obtainedValue = (Double) doublyLinkedListDeque.first();
                 Integer size = doublyLinkedListDeque.size();

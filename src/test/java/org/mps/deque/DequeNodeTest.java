@@ -105,8 +105,7 @@ public class DequeNodeTest {
                 @Test
                 void isFirstWithOneValue() {
                     DequeNode<Double> node = new DequeNode<>(12.8, null, null);
-                    Boolean obtainedValue = node.isFirstNode();
-                    assertTrue(obtainedValue);
+                    assertTrue(node.isFirstNode());
                 }
 
                 // Test that a node with no previous or next nodes is considered as last in the deque
