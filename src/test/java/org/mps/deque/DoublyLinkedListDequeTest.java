@@ -10,24 +10,32 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
  * @author Pablo Fernández Serrano
  */
 
+/**
+ * A class for testing the DoublyLinkedListDeque class.
+ */
 @DisplayName("Test of class DoublyLinkedListDeque")
 public class DoublyLinkedListDequeTest {
+    // The deque to be used in the tests
     private DoublyLinkedListDeque doublyLinkedListDeque;
 
+    // Initiates the deque to be used in the tests
     @BeforeEach
     void init() {
         doublyLinkedListDeque = new DoublyLinkedListDeque();
     }
 
+    // Tear down the deque after each test
     @AfterEach
     void terminate() {
         doublyLinkedListDeque = null;
     }
 
+    // Tests for inserting elements into the deque
     @Nested
     @DisplayName("Inputs of DoublyLinkedListDeque")
     class InputsOfDoublyLinkedListDeque {
 
+        // Test inserting null at the beginning of the deque
         @Test
         void insertStartNull() {
             assertThrows(DoubleEndedQueueException.class, () -> {
@@ -35,6 +43,7 @@ public class DoublyLinkedListDequeTest {
             });
         }
 
+        // Test inserting null at the end of the deque
         @Test
         void insertEndNull() {
             assertThrows(DoubleEndedQueueException.class, () -> {
@@ -42,6 +51,7 @@ public class DoublyLinkedListDequeTest {
             });
         }
 
+        // Test inserting elements at the beginning of the deque
         @Test
         void insertStart() {
             Double expectedValue1 = 12.7;
@@ -56,6 +66,7 @@ public class DoublyLinkedListDequeTest {
             assertEquals(2, size);
         }
 
+        // Test inserting elements at the end of the deque
         @Test
         void insertEnd() {
             Double expectedValue1 = 12.7;
@@ -70,6 +81,7 @@ public class DoublyLinkedListDequeTest {
             assertEquals(2, size);
         }
 
+        // Test inserting a single element at the beginning of the deque
         @Test
         void insertStartAlone() {
             Double expectedValue = 12.7;
@@ -82,6 +94,7 @@ public class DoublyLinkedListDequeTest {
             assertEquals(1, size);
         }
 
+        // Test inserting a single element at the end of the deque
         @Test
         void insertEndAlone() {
             Double expectedValue = 12.7;
@@ -98,6 +111,7 @@ public class DoublyLinkedListDequeTest {
         @DisplayName("Delete of DoublyLinkedListDeque")
         class ValuesOfDoublyLinkedListDeque {
 
+            // Test for deleting from an empty deque from the start
             @Test
             void deleteStartEmpty() {
                 assertThrows(DoubleEndedQueueException.class, () -> {
@@ -105,6 +119,7 @@ public class DoublyLinkedListDequeTest {
                 });
             }
 
+            // Test for deleting from an empty deque from the end
             @Test
             void deleteEndEmpty() {
                 assertThrows(DoubleEndedQueueException.class, () -> {
@@ -112,6 +127,7 @@ public class DoublyLinkedListDequeTest {
                 });
             }
 
+            // Test for deleting from the start of a deque with multiple elements
             @Test
             void deleteStart() {
                 Double expectedValue = 12.7;
@@ -127,6 +143,7 @@ public class DoublyLinkedListDequeTest {
                 assertEquals(3, size);
             }
 
+            // Test for deleting from the end of a deque with multiple elements
             @Test
             void deleteEnd() {
                 Double expectedValue = 12.7;
@@ -141,6 +158,7 @@ public class DoublyLinkedListDequeTest {
                 assertEquals(3, size);
             }
 
+            // Test for deleting the only element in the deque from the start
             @Test
             void deleteStartAlone() {
                 Integer expectedValue = 0;
@@ -150,6 +168,8 @@ public class DoublyLinkedListDequeTest {
                 assertEquals(expectedValue, obtainedValue);
             }
 
+            // The following function tests the deletion of the last element in a
+            // DoublyLinkedListDeque that has only one element.
             @Test
             void deleteEndAlone() {
                 Integer expectedValue = 0;
@@ -159,9 +179,12 @@ public class DoublyLinkedListDequeTest {
                 assertEquals(expectedValue, obtainedValue);
             }
 
+            // The following nested class contains tests for special cases involving terminals
+            // in a DoublyLinkedListDeque.
             @Nested
             @DisplayName("Terminals in special cases of DoublyLinkedListDeque")
             class TerminalDoublyLinkedListDeque {
+                // Test that a node with no previous or next nodes is considered as first in the deque
                 @Test
                 void isFirstAlone() {
                     assertThrows(DoubleEndedQueueException.class, () -> {
@@ -169,6 +192,7 @@ public class DoublyLinkedListDequeTest {
                     });
                 }
 
+                // The following function tests the behavior of the last() function when called on a deque with only one element.
                 @Test
                 void isLastAlone() {
                     assertThrows(DoubleEndedQueueException.class, () -> {
@@ -176,6 +200,7 @@ public class DoublyLinkedListDequeTest {
                     });
                 }
 
+                // The following function tests the behavior of the first() function when called on a deque with only one element.
                 @Test
                 void firstOne() {
                     Double expectedValue = 12.7;
@@ -184,6 +209,7 @@ public class DoublyLinkedListDequeTest {
                     assertEquals(expectedValue, obtainedValue);
                 }
 
+                // The following function tests the behavior of the last() function when called on a deque with only one element.
                 @Test
                 void lastOne() {
                     Double expectedValue = 12.7;
