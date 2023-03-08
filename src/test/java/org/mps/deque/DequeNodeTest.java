@@ -21,6 +21,7 @@ public class DequeNodeTest {
     @DisplayName("Inputs of DequeNode")
     class InputsOfDequeNode {
         // Test that a node with a number item can be constructed without throwing an exception@Test
+        @Test
         void numberNodeConstruction() {
             assertDoesNotThrow(() -> {
                 new DequeNode<Double>(2.03, null, null);
@@ -58,7 +59,7 @@ public class DequeNodeTest {
 
             // Test that the getItem method returns the correct value of the item stored in the node
             @Test
-            void getsItemCorrectly() {
+            void getsItem() {
                 Double expectedValue = 2.93;
                 DequeNode<Double> node = new DequeNode<>(expectedValue, null, null);
                 Double obtainedValue = node.getItem();
@@ -67,7 +68,7 @@ public class DequeNodeTest {
 
             // Test that the setItem method changes the value of the item stored in the node
             @Test
-            void setsItemCorrectly() {
+            void setsItem() {
                 Double expectedValue = 2.93;
                 DequeNode<Double> node = new DequeNode<>(9.134, null, null);
                 node.setItem(expectedValue);
@@ -78,7 +79,7 @@ public class DequeNodeTest {
 
             // Test that the setPrevious method changes the reference to the previous node in the deque
             @Test
-            void previousDequeNodeCorrectly() {
+            void previousDequeNode() {
                 DequeNode<Double> node = new DequeNode<>(2.93, null, null);
                 DequeNode<Double> expectedValue = new DequeNode<>(8.46, null, node);
                 node.setPrevious(expectedValue);
@@ -88,7 +89,7 @@ public class DequeNodeTest {
 
             // Test that the setNext method changes the reference to the next node in the deque
             @Test
-            void nextDequeNodeCorrectly() {
+            void nextDequeNode() {
                 DequeNode<Double> node = new DequeNode<>(2.93, null, null);
                 DequeNode<Double> expectedValue = new DequeNode<>(8.46, null, node);
                 node.setNext(expectedValue);
@@ -102,7 +103,7 @@ public class DequeNodeTest {
             class TerminalDequeNode {
                 // Test that a node with no previous or next nodes is considered as first in the deque
                 @Test
-                void isFirstAlone() {
+                void isFirstWithOneValue() {
                     DequeNode<Double> node = new DequeNode<>(12.8, null, null);
                     Boolean obtainedValue = node.isFirstNode();
                     assertTrue(obtainedValue);
@@ -110,14 +111,14 @@ public class DequeNodeTest {
 
                 // Test that a node with no previous or next nodes is considered as last in the deque
                 @Test
-                void isLastAlone() {
+                void isLastWithOneValue() {
                     DequeNode<Double> node = new DequeNode<>(12.8, null, null);
                     assertTrue(node.isLastNode());
                 }
 
                 // Test that a node with a previous node is not considered as first in the deque
                 @Test
-                void isNotFirstAlone() {
+                void isNotFirstWithOneValue() {
                     DequeNode<Double> node = new DequeNode<>(12.8, null, null);
                     DequeNode<Double> firstNode = new DequeNode<>(9.123, null, node);
                     node.setPrevious(firstNode);
@@ -126,7 +127,7 @@ public class DequeNodeTest {
 
                 // Test that a node with a next node is not considered as last in the deque
                 @Test
-                void isNotLastAlone() {
+                void isNotLastWithOneValue() {
                     DequeNode<Double> node = new DequeNode<>(12.8, null, null);
                     DequeNode<Double> lastNode = new DequeNode<>(9.123, node, null);
                     node.setNext(lastNode);
@@ -148,7 +149,7 @@ public class DequeNodeTest {
 
                 // Test that a node with no previous or next nodes is considered as terminal in the deque
                 @Test
-                void isTerminalAlone() {
+                void isTerminalWithOneValue() {
                     DequeNode<Double> node = new DequeNode<>(2.1, null, null);
                     assertFalse(node.isNotATerminalNode());
                 }

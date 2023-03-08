@@ -37,7 +37,7 @@ public class DoublyLinkedListDequeTest {
 
         // Test inserting null at the beginning of the deque
         @Test
-        void insertStartNull() {
+        void prependNull() {
             assertThrows(DoubleEndedQueueException.class, () -> {
                 doublyLinkedListDeque.prepend(null);
             });
@@ -45,7 +45,7 @@ public class DoublyLinkedListDequeTest {
 
         // Test inserting null at the end of the deque
         @Test
-        void insertEndNull() {
+        void appendNull() {
             assertThrows(DoubleEndedQueueException.class, () -> {
                 doublyLinkedListDeque.append(null);
             });
@@ -53,7 +53,7 @@ public class DoublyLinkedListDequeTest {
 
         // Test inserting elements at the beginning of the deque
         @Test
-        void insertStart() {
+        void prependValue() {
             Double expectedValue1 = 12.7;
             Double expectedValue2 = 83.9;
             doublyLinkedListDeque.prepend(expectedValue2);
@@ -68,7 +68,7 @@ public class DoublyLinkedListDequeTest {
 
         // Test inserting elements at the end of the deque
         @Test
-        void insertEnd() {
+        void appendValue() {
             Double expectedValue1 = 12.7;
             Double expectedValue2 = 83.9;
             doublyLinkedListDeque.append(expectedValue1);
@@ -83,7 +83,7 @@ public class DoublyLinkedListDequeTest {
 
         // Test inserting a single element at the beginning of the deque
         @Test
-        void insertStartAlone() {
+        void prependValueWithOneValuePrepended() {
             Double expectedValue = 12.7;
             doublyLinkedListDeque.prepend(expectedValue);
             Double obtainedValue1 = (Double) doublyLinkedListDeque.first();
@@ -96,7 +96,7 @@ public class DoublyLinkedListDequeTest {
 
         // Test inserting a single element at the end of the deque
         @Test
-        void insertEndAlone() {
+        void appendValueWithOneValueAppended() {
             Double expectedValue = 12.7;
             doublyLinkedListDeque.append(expectedValue);
             Double obtainedValue1 = (Double) doublyLinkedListDeque.last();
@@ -113,7 +113,7 @@ public class DoublyLinkedListDequeTest {
 
             // Test for deleting from an empty deque from the start
             @Test
-            void deleteStartEmpty() {
+            void deleteFirstValueOfEmptyList() {
                 assertThrows(DoubleEndedQueueException.class, () -> {
                     doublyLinkedListDeque.deleteFirst();
                 });
@@ -121,7 +121,7 @@ public class DoublyLinkedListDequeTest {
 
             // Test for deleting from an empty deque from the end
             @Test
-            void deleteEndEmpty() {
+            void deleteLastValueOfEmptyList() {
                 assertThrows(DoubleEndedQueueException.class, () -> {
                     doublyLinkedListDeque.deleteLast();
                 });
@@ -129,7 +129,7 @@ public class DoublyLinkedListDequeTest {
 
             // Test for deleting from the start of a deque with multiple elements
             @Test
-            void deleteStart() {
+            void deleteFirstValue() {
                 Double expectedValue = 12.7;
                 doublyLinkedListDeque.append(83.9);
                 doublyLinkedListDeque.append(expectedValue);
@@ -145,7 +145,7 @@ public class DoublyLinkedListDequeTest {
 
             // Test for deleting from the end of a deque with multiple elements
             @Test
-            void deleteEnd() {
+            void deleteLastValue() {
                 Double expectedValue = 12.7;
                 doublyLinkedListDeque.append(83.9);
                 doublyLinkedListDeque.append(3.9);
@@ -160,7 +160,7 @@ public class DoublyLinkedListDequeTest {
 
             // Test for deleting the only element in the deque from the start
             @Test
-            void deleteStartAlone() {
+            void deleteFirstValueWithOneNode() {
                 Integer expectedValue = 0;
                 doublyLinkedListDeque.prepend(expectedValue);
                 doublyLinkedListDeque.deleteFirst();
@@ -171,7 +171,7 @@ public class DoublyLinkedListDequeTest {
             // The following function tests the deletion of the last element in a
             // DoublyLinkedListDeque that has only one element.
             @Test
-            void deleteEndAlone() {
+            void deleteLastValueWithOneNode() {
                 Integer expectedValue = 0;
                 doublyLinkedListDeque.prepend(expectedValue);
                 doublyLinkedListDeque.deleteLast();
@@ -186,7 +186,7 @@ public class DoublyLinkedListDequeTest {
             class TerminalDoublyLinkedListDeque {
                 // Test that a node with no previous or next nodes is considered as first in the deque
                 @Test
-                void isFirstAlone() {
+                void isFirstWithOneNode() {
                     assertThrows(DoubleEndedQueueException.class, () -> {
                         doublyLinkedListDeque.first();
                     });
@@ -194,7 +194,7 @@ public class DoublyLinkedListDequeTest {
 
                 // The following function tests the behavior of the last() function when called on a deque with only one element.
                 @Test
-                void isLastAlone() {
+                void isLastWithLastNode() {
                     assertThrows(DoubleEndedQueueException.class, () -> {
                         doublyLinkedListDeque.last();
                     });
@@ -202,7 +202,7 @@ public class DoublyLinkedListDequeTest {
 
                 // The following function tests the behavior of the first() function when called on a deque with only one element.
                 @Test
-                void firstOne() {
+                void getFirst() {
                     Double expectedValue = 12.7;
                     doublyLinkedListDeque.append(expectedValue);
                     Double obtainedValue = (Double) doublyLinkedListDeque.first();
@@ -211,7 +211,7 @@ public class DoublyLinkedListDequeTest {
 
                 // The following function tests the behavior of the last() function when called on a deque with only one element.
                 @Test
-                void lastOne() {
+                void getLast() {
                     Double expectedValue = 12.7;
                     doublyLinkedListDeque.append(expectedValue);
                     Double obtainedValue = (Double) doublyLinkedListDeque.last();
