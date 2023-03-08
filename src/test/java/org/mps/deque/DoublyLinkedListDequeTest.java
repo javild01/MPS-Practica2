@@ -25,53 +25,77 @@ public class DoublyLinkedListDequeTest {
     }
 
     @Nested
-    @DisplayName("Inputs")
+    @DisplayName("Inputs of DoublyLinkedListDeque")
     class InputsOfDoublyLinkedListDeque {
 
         @Test
+        void insertStartNull() {
+            assertThrows(DoubleEndedQueueException.class, () -> {
+                doublyLinkedListDeque.prepend(null);
+            });
+        }
+
+        @Test
+        void insertEndNull() {
+            assertThrows(DoubleEndedQueueException.class, () -> {
+                doublyLinkedListDeque.append(null);
+            });
+        }
+
+        @Test
         void insertStart() {
-            Double expectedValue = 12.7;
-            doublyLinkedListDeque.append(83.9);
-            doublyLinkedListDeque.append(expectedValue);
-            Double obtainedValue = (Double) doublyLinkedListDeque.last();
+            Double expectedValue1 = 12.7;
+            Double expectedValue2 = 83.9;
+            doublyLinkedListDeque.prepend(expectedValue2);
+            doublyLinkedListDeque.prepend(expectedValue1);
+            Double obtainedValue1 = (Double) doublyLinkedListDeque.first();
+            Double obtainedValue2 = (Double) doublyLinkedListDeque.last();
             Integer size = doublyLinkedListDeque.size();
-            assertEquals(expectedValue, obtainedValue);
+            assertEquals(expectedValue1, obtainedValue1);
+            assertEquals(expectedValue2, obtainedValue2);
             assertEquals(2, size);
         }
 
         @Test
         void insertEnd() {
-            Double expectedValue = 12.7;
-            doublyLinkedListDeque.prepend(83.9);
-            doublyLinkedListDeque.prepend(expectedValue);
-            Double obtainedValue = (Double) doublyLinkedListDeque.first();
+            Double expectedValue1 = 12.7;
+            Double expectedValue2 = 83.9;
+            doublyLinkedListDeque.append(expectedValue1);
+            doublyLinkedListDeque.append(expectedValue2);
+            Double obtainedValue2 = (Double) doublyLinkedListDeque.last();
+            Double obtainedValue1 = (Double) doublyLinkedListDeque.first();
             Integer size = doublyLinkedListDeque.size();
-            assertEquals(expectedValue, obtainedValue);
+            assertEquals(expectedValue1, obtainedValue1);
+            assertEquals(expectedValue2, obtainedValue2);
             assertEquals(2, size);
         }
 
         @Test
         void insertStartAlone() {
             Double expectedValue = 12.7;
-            doublyLinkedListDeque.append(expectedValue);
-            Double obtainedValue = (Double) doublyLinkedListDeque.last();
+            doublyLinkedListDeque.prepend(expectedValue);
+            Double obtainedValue1 = (Double) doublyLinkedListDeque.first();
+            Double obtainedValue2 = (Double) doublyLinkedListDeque.last();
             Integer size = doublyLinkedListDeque.size();
-            assertEquals(expectedValue, obtainedValue);
+            assertEquals(expectedValue, obtainedValue1);
+            assertEquals(expectedValue, obtainedValue2);
             assertEquals(1, size);
         }
 
         @Test
         void insertEndAlone() {
             Double expectedValue = 12.7;
-            doublyLinkedListDeque.prepend(expectedValue);
-            Double obtainedValue = (Double) doublyLinkedListDeque.first();
+            doublyLinkedListDeque.append(expectedValue);
+            Double obtainedValue1 = (Double) doublyLinkedListDeque.last();
+            Double obtainedValue2 = (Double) doublyLinkedListDeque.first();
             Integer size = doublyLinkedListDeque.size();
-            assertEquals(expectedValue, obtainedValue);
+            assertEquals(expectedValue, obtainedValue1);
+            assertEquals(expectedValue, obtainedValue2);
             assertEquals(1, size);
         }
 
         @Nested
-        @DisplayName("Delete")
+        @DisplayName("Delete of DoublyLinkedListDeque")
         class ValuesOfDoublyLinkedListDeque {
 
             @Test
@@ -95,6 +119,7 @@ public class DoublyLinkedListDequeTest {
                 doublyLinkedListDeque.append(expectedValue);
                 doublyLinkedListDeque.append(8.9);
                 doublyLinkedListDeque.append(89);
+                System.out.println(doublyLinkedListDeque.first());
                 doublyLinkedListDeque.deleteFirst();
                 Double obtainedValue = (Double) doublyLinkedListDeque.first();
                 Integer size = doublyLinkedListDeque.size();
@@ -105,10 +130,10 @@ public class DoublyLinkedListDequeTest {
             @Test
             void deleteEnd() {
                 Double expectedValue = 12.7;
-                doublyLinkedListDeque.prepend(83.9);
-                doublyLinkedListDeque.prepend(3.9);
-                doublyLinkedListDeque.prepend(expectedValue);
-                doublyLinkedListDeque.prepend(73.9);
+                doublyLinkedListDeque.append(83.9);
+                doublyLinkedListDeque.append(3.9);
+                doublyLinkedListDeque.append(expectedValue);
+                doublyLinkedListDeque.append(73.9);
                 doublyLinkedListDeque.deleteLast();
                 Double obtainedValue = (Double) doublyLinkedListDeque.last();
                 Integer size = doublyLinkedListDeque.size();
@@ -135,7 +160,7 @@ public class DoublyLinkedListDequeTest {
             }
 
             @Nested
-            @DisplayName("Terminals in special cases")
+            @DisplayName("Terminals in special cases of DoublyLinkedListDeque")
             class TerminalDoublyLinkedListDeque {
                 @Test
                 void isFirstAlone() {

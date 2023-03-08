@@ -17,7 +17,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class DequeNodeTest {
 
     @Nested
-    @DisplayName("Inputs")
+    @DisplayName("Inputs of DequeNode")
     class InputsOfDequeNode {
         @Test
         void numberNodeConstruction() {
@@ -48,7 +48,7 @@ public class DequeNodeTest {
         }
 
         @Nested
-        @DisplayName("Values")
+        @DisplayName("Values of DequeNode")
         class ValuesOfDequeNode {
             @Test
             void getsItemCorrectly() {
@@ -86,12 +86,13 @@ public class DequeNodeTest {
             }
 
             @Nested
-            @DisplayName("Terminals")
+            @DisplayName("Terminals of DequeNode")
             class TerminalDequeNode {
                 @Test
                 void isFirstAlone() {
                     DequeNode<Double> node = new DequeNode<>(12.8, null, null);
-                    assertTrue(node.isFirstNode());
+                    Boolean obtainedValue = node.isFirstNode();
+                    assertTrue(obtainedValue);
                 }
 
                 @Test
