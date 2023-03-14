@@ -1,5 +1,9 @@
 package org.mps.deque;
 
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
+
 /**
  * @author Javier Leiva Dueñas
  * @author Pablo Fernández Serrano
@@ -94,5 +98,86 @@ public class DoublyLinkedListDeque<T> implements DoubleEndedQueue<T> {
     @Override
     public int size() {
         return size;
+    }
+
+    @Override
+    public T get(int index) {
+        DequeNode node = first;
+        for (int i = 0; i < index; i++) {
+            node = node.getNext();
+        }
+        return (T)node.getItem();
+    }
+
+    @Override
+    public boolean contains(T value) {
+        DequeNode node = first;
+        while (node != null) {
+            if (node.getItem().equals(value))
+                return true;
+            node = node.getNext();
+        }
+        return false;
+    }
+
+    @Override
+    public void remove(T value) {
+        DequeNode node = first;
+        while (node != null) {
+            if (node.getItem().equals(value)) {
+                if (node.getNext() != null) {
+                    if (node.getPrevious() != null) {
+                        node.getNext().setPrevious(node.getPrevious());
+                        node.getPrevious().setNext(node.getNext());
+                    } else {
+                        node.getNext().setPrevious(null);
+                        first = node.getNext();
+                    }
+                } else {
+                    if (node.getPrevious() != null) {
+                        last = node.getPrevious();
+                        node.getPrevious().setNext(null);
+                    } else {
+                        first = null;
+                        last = null;
+                    }
+                }
+                if (node.getPrevious() != null) {
+                    if (node.getNext() != null) {
+                        node.getPrevious().setNext(node.getNext());
+                        node.getNext().setPrevious(node.getPrevious());
+                    } else {
+                        node.getPrevious().setNext(null);
+                        last = node.getPrevious();
+                    }
+                } else {
+                    if (node.getNext() != null) {
+                        first = node.getNext();
+                        node.getNext().setPrevious(null);
+                    } else {
+                        first = null;
+                        last = null;
+                    }
+                }
+                break;
+            }
+            node = node.getNext();
+        }
+    }
+
+    @Override
+    public void sort(Comparator<? super T> comparator) {
+        List<T> list = new ArrayList<T>();
+        while (first != null) {
+            list.add(this.first.getItem());
+            this.deleteFirst();
+        }
+        first = null;
+        last = null;
+        list.sort(comparator);
+        while (!list.isEmpty()) {
+            this.append(list.get(0));
+            list.remove(0);
+        }
     }
 }
