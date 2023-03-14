@@ -2,6 +2,9 @@ package org.mps.deque;
 
 import org.junit.jupiter.api.*;
 
+import java.util.Comparator;
+import java.util.Objects;
+
 import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 
@@ -216,6 +219,188 @@ public class DoublyLinkedListDequeTest {
                     Double obtainedValue = (Double) doublyLinkedListDeque.last();
                     assertEquals(expectedValue, obtainedValue);
                 }
+            }
+        }
+    }
+
+    @Nested
+    @DisplayName("Complex methods")
+    class ComplexMethods {
+        @Nested
+        @DisplayName("Get Method")
+        class GetMethod {
+            @Test
+            void getElementByIndexWithEmptyList() {
+                assertNull(doublyLinkedListDeque.get(5));
+            }
+
+            @Test
+            void getElementByIndexInList() {
+                doublyLinkedListDeque.append(0);
+                int expectedValue = 0;
+                int obtainedValue = (int) doublyLinkedListDeque.get(0);
+                assertEquals(expectedValue, obtainedValue);
+            }
+
+            @Test
+            void getElementByIndezNotInList() {
+                doublyLinkedListDeque.append(8);
+                doublyLinkedListDeque.append(0);
+                assertNull(doublyLinkedListDeque.get(5));
+            }
+        }
+
+        @Nested
+        @DisplayName("Remove Method")
+        class RemoveMethod {
+            @Test
+            void removeElementInEmptyList() {
+                assertDoesNotThrow(() -> {
+                    doublyLinkedListDeque.remove(1);
+                });
+            }
+
+            @Test
+            void removeElementInListWithOneElement() {
+                doublyLinkedListDeque.append(1);
+                doublyLinkedListDeque.remove(1);
+                assertNull(doublyLinkedListDeque.first());
+            }
+
+            @Test
+            void removeElementNotContainedInListWithOneElement() {
+                doublyLinkedListDeque.append(3);
+                doublyLinkedListDeque.remove(1);
+                int expectedValue = 1;
+                int obtainedValue = doublyLinkedListDeque.size();
+                assertEquals(expectedValue, obtainedValue);
+            }
+
+            @Test
+            void removeElementInList() {
+                doublyLinkedListDeque.append(3);
+                doublyLinkedListDeque.append(2);
+                doublyLinkedListDeque.append(7);
+                doublyLinkedListDeque.append(9);
+                doublyLinkedListDeque.remove(7);
+                int expectedValueOfSize = 3;
+                int obtainedValueOfSize = doublyLinkedListDeque.size();
+                assertEquals(expectedValueOfSize, obtainedValueOfSize);
+                int expectedValueOfNode = 9;
+                int obtainedValueOfNode = (int)doublyLinkedListDeque.get(2);
+                assertEquals(expectedValueOfNode, obtainedValueOfNode);
+            }
+
+            @Test
+            void removeElementNotContainedInList() {
+                doublyLinkedListDeque.append(3);
+                doublyLinkedListDeque.append(2);
+                doublyLinkedListDeque.append(7);
+                doublyLinkedListDeque.append(9);
+                doublyLinkedListDeque.remove(8);
+                int expectedValueOfSize = 4;
+                int obtainedValueOfSize = doublyLinkedListDeque.size();
+                assertEquals(expectedValueOfSize, obtainedValueOfSize);
+                int expectedValueOfNode = 7;
+                int obtainedValueOfNode = (int)doublyLinkedListDeque.get(2);
+                assertEquals(expectedValueOfNode, obtainedValueOfNode);
+            }
+        }
+
+        @Nested
+        @DisplayName("Contains Method")
+        class ContainsMethod {
+            @Test
+            void emptyListDoesNotContainValue() {
+                assertFalse(doublyLinkedListDeque.contains(9.3));
+            }
+
+            @Test
+            void oneElementListDoesNotContainValue() {
+                doublyLinkedListDeque.append(9.3);
+                assertTrue(doublyLinkedListDeque.contains(9.3));
+            }
+
+            @Test
+            void oneElementListDoesContainValue() {
+                doublyLinkedListDeque.append(9.1);
+                assertFalse(doublyLinkedListDeque.contains(9.3));
+            }
+
+            @Test
+            void listDoesNotContainValue() {
+                doublyLinkedListDeque.append(9.3);
+                doublyLinkedListDeque.append(9.3);
+                doublyLinkedListDeque.append(9.3);
+                doublyLinkedListDeque.append(9.3);
+                assertTrue(doublyLinkedListDeque.contains(9.3));
+            }
+
+            @Test
+            void listDoesContainValue() {
+                doublyLinkedListDeque.append(9.1);
+                doublyLinkedListDeque.append(9.3);
+                doublyLinkedListDeque.append(9.3);
+                doublyLinkedListDeque.append(9.3);
+                doublyLinkedListDeque.append(9.3);
+                doublyLinkedListDeque.append(9.3);
+                assertFalse(doublyLinkedListDeque.contains(5.7));
+            }
+        }
+
+        @Nested
+        @DisplayName("Sort Method")
+        class SortMethod {
+            @Test
+            void sortEmptyList() {
+                doublyLinkedListDeque.sort(Comparator.comparingInt(Integer::intValue));
+            }
+
+            @Test
+            void sortOneElementList() {
+                doublyLinkedListDeque.append(8);
+                doublyLinkedListDeque.sort(Comparator.comparingInt(Integer::intValue));
+                int expectedValue = 8;
+                int obtainedValue = (int) doublyLinkedListDeque.first();
+                assertEquals(expectedValue, obtainedValue);
+            }
+
+            @Test
+            void sortTwoElementList() {
+                doublyLinkedListDeque.append(5);
+                doublyLinkedListDeque.append(8);
+                doublyLinkedListDeque.sort(Comparator.comparingInt(Integer::intValue));
+                int expectedFirstValue = 8;
+                int obtainedFirstValue = (int) doublyLinkedListDeque.first();
+                assertEquals(expectedFirstValue, obtainedFirstValue);
+                int expectedSecondValue = 8;
+                int obtainedSecondValue = (int) doublyLinkedListDeque.last();
+                assertEquals(expectedSecondValue, obtainedSecondValue);
+            }
+
+            @Test
+            void sortList() {
+                doublyLinkedListDeque.append(5);
+                doublyLinkedListDeque.append(8);
+                doublyLinkedListDeque.append(7);
+                doublyLinkedListDeque.append(5);
+                doublyLinkedListDeque.append(0);
+                doublyLinkedListDeque.sort(Comparator.comparingInt(Integer::intValue));
+                int expectedFirstValue = 0;
+                int obtainedFirstValue = (int) doublyLinkedListDeque.get(0);
+                assertEquals(expectedFirstValue, obtainedFirstValue);
+                int expectedSecondValue = 5;
+                int obtainedSecondValue = (int) doublyLinkedListDeque.get(1);
+                assertEquals(expectedSecondValue, obtainedSecondValue);
+                int expectedThirdValue = 5;
+                int obtainedThirdValue = (int) doublyLinkedListDeque.get(2);
+                assertEquals(expectedThirdValue, obtainedThirdValue);
+                int expectedFourthValue = 7;
+                int obtainedFourthValue = (int) doublyLinkedListDeque.get(3);
+                assertEquals(expectedFourthValue, obtainedFourthValue);
+                int expectedFifthValue = 8;
+                int obtainedFifthValue = (int) doublyLinkedListDeque.get(4);
+                assertEquals(expectedFifthValue, obtainedFifthValue);
             }
         }
     }
