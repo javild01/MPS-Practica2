@@ -229,7 +229,7 @@ public class DoublyLinkedListDequeTest {
     }
 
     @Nested
-// This test class groups the methods related to complex operations on the list    @DisplayName("Complex methods")
+    // This test class groups the methods related to complex operations on the list    @DisplayName("Complex methods")
     class ComplexMethods {
         @Nested
         @DisplayName("Get Method")
