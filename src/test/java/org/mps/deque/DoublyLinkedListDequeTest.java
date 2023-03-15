@@ -229,14 +229,13 @@ public class DoublyLinkedListDequeTest {
     }
 
     @Nested
-    // Esta clase de test agrupa los métodos relacionados con operaciones complejas sobre la lista
-    @DisplayName("Complex methods")
+// This test class groups the methods related to complex operations on the list    @DisplayName("Complex methods")
     class ComplexMethods {
         @Nested
         @DisplayName("Get Method")
         class GetMethod {
 
-             // Este test comprueba que al intentar acceder a un índice negativo con el método get se lanza una excepción
+             // This test checks that an exception is thrown when trying to access a negative index with the get method
              @Test
              void getNegativeIndexThrowsException(){
                  assertThrows(DoubleEndedQueueException.class,()->{
@@ -244,7 +243,7 @@ public class DoublyLinkedListDequeTest {
                  });
              }
 
-            // Este test verifica si se lanza una excepción al intentar obtener un elemento de una lista vacía
+            // This test verifies if an exception is thrown when trying to get an element from an empty list
             @Test
             void getElementByIndexWithEmptyList() {
                 assertThrows(DoubleEndedQueueException.class, () -> {
@@ -252,7 +251,7 @@ public class DoublyLinkedListDequeTest {
                 });
             }
 
-            // Este test verifica si se obtiene el valor correcto al obtener un elemento de una lista con un solo elemento
+            // This test verifies if the correct value is obtained when getting an element from a list with a single element
             @Test
             void getElementByIndexInList() {
                 doublyLinkedListDeque.append(0);
@@ -261,7 +260,7 @@ public class DoublyLinkedListDequeTest {
                 assertEquals(expectedValue, obtainedValue);
             }
 
-            // Este test verifica si se lanza una excepción al intentar obtener un elemento que no está en la lista
+            // This test verifies if an exception is thrown when trying to get an element that is not in the list
             @Test
             void getElementByIndexNotInList() {
                 doublyLinkedListDeque.append(8);
@@ -276,7 +275,7 @@ public class DoublyLinkedListDequeTest {
         @DisplayName("Remove Method")
         class RemoveMethod {
 
-            // Este test comprueba que se elimina el primer elemento
+            // This test checks that the first element is removed
             @Test
             void removesFirstElement(){
                 doublyLinkedListDeque.append(9);
@@ -291,8 +290,8 @@ public class DoublyLinkedListDequeTest {
                 assertEquals(expectedLastElement,doublyLinkedListDeque.last());
             }
 
-            //Este test verifica que se elimina correctamente un elemento que es el último pero no el primero
-            // (si fuera una lista con un único elemento, entonces ese elemento sería primero y último a la vez)
+            // This test verifies that an element that is the last but not the first is correctly removed
+            // (if it were a list with a single element, then that element would be first and last at the same time)
             @Test
             void removesLastButNotFirstElement(){
                 doublyLinkedListDeque.append(9.0);
@@ -308,7 +307,7 @@ public class DoublyLinkedListDequeTest {
                 assertEquals(expectedLastElement,doublyLinkedListDeque.last());
             }
 
-            // Este test verifica si no se lanza ninguna excepción al intentar eliminar un elemento de una lista vacía
+            // This test verifies if no exception is thrown when trying to remove an element from an empty list
             @Test
             void removeElementInEmptyList() {
                 assertDoesNotThrow(() -> {
@@ -316,7 +315,8 @@ public class DoublyLinkedListDequeTest {
                 });
             }
 
-            // Este test verifica si se elimina correctamente el único elemento de una lista y si se lanza una excepción al intentar acceder al primer elemento de la lista vacía
+            // This test verifies if the only element of a list is correctly removed and
+            // if an exception is thrown when trying to access the first element of the empty list
             @Test
             void removeElementInListWithOneElement() {
                 doublyLinkedListDeque.append(1);
@@ -326,7 +326,7 @@ public class DoublyLinkedListDequeTest {
                 });
             }
 
-            // Este test verifica si no se modifica la lista al intentar eliminar un elemento que no está en la lista con un solo elemento y si el tamaño de la lista sigue siendo el mismo
+            // This test verifies if it does not modify the list when trying to remove an element that is not in the list with a single element and if the size of the list remains unchanged
             @Test
             void removeElementNotContainedInListWithOneElement() {
                 doublyLinkedListDeque.append(3);
@@ -336,7 +336,7 @@ public class DoublyLinkedListDequeTest {
                 assertEquals(expectedValue, obtainedValue);
             }
 
-            // Este test verifica si se elimina correctamente un elemento que está en la lista y si el tamaño y los valores de la lista se actualizan correctamente
+            // This test verifies if it correctly removes an element that is in the list and if it updates correctly both size and values of nodes
             @Test
             void removeElementInList() {
                 doublyLinkedListDeque.append(3);
@@ -352,7 +352,8 @@ public class DoublyLinkedListDequeTest {
                 assertEquals(expectedValueOfNode, obtainedValueOfNode);
             }
 
-            // Este test verifica si no se modifica la lista al intentar eliminar un elemento que no está en la lista y si el tamaño y los valores de la lista siguen siendo los mismos
+            // This test verifies if the list is not modified when trying to delete an element which isn´t on the list and if the size and values of the list
+            //remain the same
             @Test
             void removeElementNotContainedInList() {
                 doublyLinkedListDeque.append(3);
@@ -418,14 +419,15 @@ public class DoublyLinkedListDequeTest {
         @Nested
         @DisplayName("Sort Method")
         class SortMethod {
-            // Este test verifica que tras ordenar una lista vacía, el tamaño sigue siendo cero
+
+            // This test verifies that after sorting an empty list, the size is still zero
             @Test
             void sortEmptyList() {
                 doublyLinkedListDeque.sort(Comparator.comparingInt(Integer::intValue));
                 assertEquals(doublyLinkedListDeque.size(),0);
             }
 
-            // Este test verifica si se puede ordenar una lista con un solo elemento sin modificarlo
+            // This test verifies if you can sort a list with a single element without modifying it
             @Test
             void sortOneElementList() {
                 doublyLinkedListDeque.append(8);
@@ -435,7 +437,7 @@ public class DoublyLinkedListDequeTest {
                 assertEquals(expectedValue, obtainedValue);
             }
 
-            // Este test verifica si se puede ordenar una lista con dos elementos en orden ascendente
+            // This test verifies if you can sort a list with two elements in ascending order
             @Test
             void sortTwoElementList() {
                 doublyLinkedListDeque.append(8);
@@ -449,7 +451,7 @@ public class DoublyLinkedListDequeTest {
                 assertEquals(expectedSecondValue, obtainedSecondValue);
             }
 
-            // Este test verifica si se puede ordenar una lista con varios elementos en orden ascendente y si los valores de la lista se corresponden con los esperados
+            // This test verifies if you can sort a list with several elements in ascending order and if the values of the list correspond to those expected
             @Test
             void sortList() {
                 doublyLinkedListDeque.append(5);
