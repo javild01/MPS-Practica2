@@ -229,11 +229,22 @@ public class DoublyLinkedListDequeTest {
     }
 
     @Nested
+    // Esta clase de test agrupa los métodos relacionados con operaciones complejas sobre la lista
     @DisplayName("Complex methods")
     class ComplexMethods {
         @Nested
         @DisplayName("Get Method")
         class GetMethod {
+
+             // Este test comprueba que al intentar acceder a un índice negativo con el método get se lanza una excepción
+             @Test
+             void getNegativeIndexThrowsException(){
+                 assertThrows(DoubleEndedQueueException.class,()->{
+                     doublyLinkedListDeque.get(-5);
+                 });
+             }
+
+            // Este test verifica si se lanza una excepción al intentar obtener un elemento de una lista vacía
             @Test
             void getElementByIndexWithEmptyList() {
                 assertThrows(DoubleEndedQueueException.class, () -> {
@@ -241,6 +252,7 @@ public class DoublyLinkedListDequeTest {
                 });
             }
 
+            // Este test verifica si se obtiene el valor correcto al obtener un elemento de una lista con un solo elemento
             @Test
             void getElementByIndexInList() {
                 doublyLinkedListDeque.append(0);
@@ -249,6 +261,7 @@ public class DoublyLinkedListDequeTest {
                 assertEquals(expectedValue, obtainedValue);
             }
 
+            // Este test verifica si se lanza una excepción al intentar obtener un elemento que no está en la lista
             @Test
             void getElementByIndexNotInList() {
                 doublyLinkedListDeque.append(8);
@@ -262,6 +275,40 @@ public class DoublyLinkedListDequeTest {
         @Nested
         @DisplayName("Remove Method")
         class RemoveMethod {
+
+            // Este test comprueba que se elimina el primer elemento
+            @Test
+            void removesFirstElement(){
+                doublyLinkedListDeque.append(9);
+                doublyLinkedListDeque.append(2.3);
+                doublyLinkedListDeque.append(15.4);
+                doublyLinkedListDeque.append(4.7);
+
+                double expectedFirstElement = 2.3;
+                double expectedLastElement = 4.7;
+                doublyLinkedListDeque.remove(9);
+                assertEquals(expectedFirstElement,doublyLinkedListDeque.first());
+                assertEquals(expectedLastElement,doublyLinkedListDeque.last());
+            }
+
+            //Este test verifica que se elimina correctamente un elemento que es el último pero no el primero
+            // (si fuera una lista con un único elemento, entonces ese elemento sería primero y último a la vez)
+            @Test
+            void removesLastButNotFirstElement(){
+                doublyLinkedListDeque.append(9.0);
+                doublyLinkedListDeque.append(2.3);
+                doublyLinkedListDeque.append(15.4);
+                doublyLinkedListDeque.append(4.7);
+
+                doublyLinkedListDeque.remove(4.7);
+                double expectedFirstElement = 9;
+                double expectedLastElement = 15.4;
+
+                assertEquals(expectedFirstElement,doublyLinkedListDeque.first());
+                assertEquals(expectedLastElement,doublyLinkedListDeque.last());
+            }
+
+            // Este test verifica si no se lanza ninguna excepción al intentar eliminar un elemento de una lista vacía
             @Test
             void removeElementInEmptyList() {
                 assertDoesNotThrow(() -> {
@@ -269,6 +316,7 @@ public class DoublyLinkedListDequeTest {
                 });
             }
 
+            // Este test verifica si se elimina correctamente el único elemento de una lista y si se lanza una excepción al intentar acceder al primer elemento de la lista vacía
             @Test
             void removeElementInListWithOneElement() {
                 doublyLinkedListDeque.append(1);
@@ -278,6 +326,7 @@ public class DoublyLinkedListDequeTest {
                 });
             }
 
+            // Este test verifica si no se modifica la lista al intentar eliminar un elemento que no está en la lista con un solo elemento y si el tamaño de la lista sigue siendo el mismo
             @Test
             void removeElementNotContainedInListWithOneElement() {
                 doublyLinkedListDeque.append(3);
@@ -287,6 +336,7 @@ public class DoublyLinkedListDequeTest {
                 assertEquals(expectedValue, obtainedValue);
             }
 
+            // Este test verifica si se elimina correctamente un elemento que está en la lista y si el tamaño y los valores de la lista se actualizan correctamente
             @Test
             void removeElementInList() {
                 doublyLinkedListDeque.append(3);
@@ -302,6 +352,7 @@ public class DoublyLinkedListDequeTest {
                 assertEquals(expectedValueOfNode, obtainedValueOfNode);
             }
 
+            // Este test verifica si no se modifica la lista al intentar eliminar un elemento que no está en la lista y si el tamaño y los valores de la lista siguen siendo los mismos
             @Test
             void removeElementNotContainedInList() {
                 doublyLinkedListDeque.append(3);
@@ -321,25 +372,29 @@ public class DoublyLinkedListDequeTest {
         @Nested
         @DisplayName("Contains Method")
         class ContainsMethod {
+            // Este test verifica si una lista vacía no contiene ningún valor
             @Test
             void emptyListDoesNotContainValue() {
                 assertFalse(doublyLinkedListDeque.contains(9.3));
             }
 
+            // Este test verifica si una lista con un solo elemento contiene ese elemento
             @Test
-            void oneElementListDoesNotContainValue() {
+            void oneElementListDoesContainValue() {
                 doublyLinkedListDeque.append(9.3);
                 assertTrue(doublyLinkedListDeque.contains(9.3));
             }
 
+            // Este test verifica si una lista con un solo elemento no contiene otro elemento distinto
             @Test
-            void oneElementListDoesContainValue() {
+            void oneElementListDoesNotContainValue() {
                 doublyLinkedListDeque.append(9.1);
                 assertFalse(doublyLinkedListDeque.contains(9.3));
             }
 
+            // Este test verifica si una lista con varios elementos iguales contiene ese elemento
             @Test
-            void listDoesNotContainValue() {
+            void listDoesContainValue() {
                 doublyLinkedListDeque.append(9.3);
                 doublyLinkedListDeque.append(9.3);
                 doublyLinkedListDeque.append(9.3);
@@ -347,8 +402,9 @@ public class DoublyLinkedListDequeTest {
                 assertTrue(doublyLinkedListDeque.contains(9.3));
             }
 
+            // Este test verifica que una lista no contiene un elemento que no se ha añadido
             @Test
-            void listDoesContainValue() {
+            void listDoesNotContainValue() {
                 doublyLinkedListDeque.append(9.1);
                 doublyLinkedListDeque.append(9.3);
                 doublyLinkedListDeque.append(9.3);
@@ -362,11 +418,14 @@ public class DoublyLinkedListDequeTest {
         @Nested
         @DisplayName("Sort Method")
         class SortMethod {
+            // Este test verifica que tras ordenar una lista vacía, el tamaño sigue siendo cero
             @Test
             void sortEmptyList() {
                 doublyLinkedListDeque.sort(Comparator.comparingInt(Integer::intValue));
+                assertEquals(doublyLinkedListDeque.size(),0);
             }
 
+            // Este test verifica si se puede ordenar una lista con un solo elemento sin modificarlo
             @Test
             void sortOneElementList() {
                 doublyLinkedListDeque.append(8);
@@ -376,6 +435,7 @@ public class DoublyLinkedListDequeTest {
                 assertEquals(expectedValue, obtainedValue);
             }
 
+            // Este test verifica si se puede ordenar una lista con dos elementos en orden ascendente
             @Test
             void sortTwoElementList() {
                 doublyLinkedListDeque.append(8);
@@ -389,6 +449,7 @@ public class DoublyLinkedListDequeTest {
                 assertEquals(expectedSecondValue, obtainedSecondValue);
             }
 
+            // Este test verifica si se puede ordenar una lista con varios elementos en orden ascendente y si los valores de la lista se corresponden con los esperados
             @Test
             void sortList() {
                 doublyLinkedListDeque.append(5);

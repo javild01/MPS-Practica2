@@ -109,8 +109,6 @@ public class DoublyLinkedListDeque<T> implements DoubleEndedQueue<T> {
             node = node.getNext();
             index--;
         }
-        if (node == null)
-            return null;
         return (T)node.getItem();
     }
 
