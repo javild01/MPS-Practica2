@@ -231,7 +231,9 @@ public class DoublyLinkedListDequeTest {
         class GetMethod {
             @Test
             void getElementByIndexWithEmptyList() {
-                assertNull(doublyLinkedListDeque.get(5));
+                assertThrows(DoubleEndedQueueException.class, () -> {
+                    assertNull(doublyLinkedListDeque.get(5));
+                });
             }
 
             @Test
@@ -243,10 +245,12 @@ public class DoublyLinkedListDequeTest {
             }
 
             @Test
-            void getElementByIndezNotInList() {
+            void getElementByIndexNotInList() {
                 doublyLinkedListDeque.append(8);
                 doublyLinkedListDeque.append(0);
-                assertNull(doublyLinkedListDeque.get(5));
+                assertThrows(DoubleEndedQueueException.class, () -> {
+                    assertNull(doublyLinkedListDeque.get(5));
+                });
             }
         }
 
@@ -264,7 +268,9 @@ public class DoublyLinkedListDequeTest {
             void removeElementInListWithOneElement() {
                 doublyLinkedListDeque.append(1);
                 doublyLinkedListDeque.remove(1);
-                assertNull(doublyLinkedListDeque.first());
+                assertThrows(DoubleEndedQueueException.class, () -> {
+                    doublyLinkedListDeque.first();
+                });
             }
 
             @Test
@@ -367,10 +373,10 @@ public class DoublyLinkedListDequeTest {
 
             @Test
             void sortTwoElementList() {
-                doublyLinkedListDeque.append(5);
                 doublyLinkedListDeque.append(8);
+                doublyLinkedListDeque.append(5);
                 doublyLinkedListDeque.sort(Comparator.comparingInt(Integer::intValue));
-                int expectedFirstValue = 8;
+                int expectedFirstValue = 5;
                 int obtainedFirstValue = (int) doublyLinkedListDeque.first();
                 assertEquals(expectedFirstValue, obtainedFirstValue);
                 int expectedSecondValue = 8;

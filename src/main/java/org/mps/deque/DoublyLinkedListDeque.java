@@ -81,17 +81,15 @@ public class DoublyLinkedListDeque<T> implements DoubleEndedQueue<T> {
 
     @Override
     public T first() {
-        if (first == null) {
-            throw new DoubleEndedQueueException("List is empty");
-        }
+        if (size == 0)
+            throw new DoubleEndedQueueException("Empty List");
         return first.getItem();
     }
 
     @Override
     public T last() {
-        if (last == null) {
-            throw new DoubleEndedQueueException("List is empty");
-        }
+        if (size == 0)
+            throw new DoubleEndedQueueException("Empty List");
         return last.getItem();
     }
 
@@ -102,10 +100,17 @@ public class DoublyLinkedListDeque<T> implements DoubleEndedQueue<T> {
 
     @Override
     public T get(int index) {
+        if (index < 0)
+            throw new DoubleEndedQueueException("NegativeIndex");
+        if (size < index)
+            throw new DoubleEndedQueueException("IndexOutOfBound");
         DequeNode node = first;
-        for (int i = 0; i < index; i++) {
+        while (index > 0 && node != null) {
             node = node.getNext();
+            index--;
         }
+        if (node == null)
+            return null;
         return (T)node.getItem();
     }
 
@@ -142,23 +147,7 @@ public class DoublyLinkedListDeque<T> implements DoubleEndedQueue<T> {
                         last = null;
                     }
                 }
-                if (node.getPrevious() != null) {
-                    if (node.getNext() != null) {
-                        node.getPrevious().setNext(node.getNext());
-                        node.getNext().setPrevious(node.getPrevious());
-                    } else {
-                        node.getPrevious().setNext(null);
-                        last = node.getPrevious();
-                    }
-                } else {
-                    if (node.getNext() != null) {
-                        first = node.getNext();
-                        node.getNext().setPrevious(null);
-                    } else {
-                        first = null;
-                        last = null;
-                    }
-                }
+                size--;
                 break;
             }
             node = node.getNext();
