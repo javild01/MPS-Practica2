@@ -34,85 +34,90 @@ public class DoublyLinkedListDequeTest {
     }
 
     // Tests for inserting elements into the deque
+
     @Nested
-    @DisplayName("Inputs of DoublyLinkedListDeque")
-    class InputsOfDoublyLinkedListDeque {
+    @DisplayName("Simple methods")
+    class SimpleMethods {
+        @Nested
+        @DisplayName("Append and prepend")
+        class AppendAndPrepend {
 
-        // Test inserting null at the beginning of the deque
-        @Test
-        void prependNull() {
-            assertThrows(DoubleEndedQueueException.class, () -> {
-                doublyLinkedListDeque.prepend(null);
-            });
-        }
+            // Test inserting null at the beginning of the deque
+            @Test
+            void prependNull() {
+                assertThrows(DoubleEndedQueueException.class, () -> {
+                    doublyLinkedListDeque.prepend(null);
+                });
+            }
 
-        // Test inserting null at the end of the deque
-        @Test
-        void appendNull() {
-            assertThrows(DoubleEndedQueueException.class, () -> {
-                doublyLinkedListDeque.append(null);
-            });
-        }
+            // Test inserting null at the end of the deque
+            @Test
+            void appendNull() {
+                assertThrows(DoubleEndedQueueException.class, () -> {
+                    doublyLinkedListDeque.append(null);
+                });
+            }
 
-        // Test inserting elements at the beginning of the deque
-        @Test
-        void prependValue() {
-            Double expectedFirstValue = 12.7;
-            Double expectedLastValue = 83.9;
-            doublyLinkedListDeque.prepend(expectedLastValue);
-            doublyLinkedListDeque.prepend(expectedFirstValue);
-            Double obtainedFirstValue = (Double) doublyLinkedListDeque.first();
-            Double obtainedLastValue = (Double) doublyLinkedListDeque.last();
-            Integer size = doublyLinkedListDeque.size();
-            assertEquals(expectedFirstValue, obtainedFirstValue);
-            assertEquals(expectedLastValue, obtainedLastValue);
-            assertEquals(2, size);
-        }
+            // Test inserting elements at the beginning of the deque
+            @Test
+            void prependValue() {
+                Double expectedFirstValue = 12.7;
+                Double expectedLastValue = 83.9;
+                doublyLinkedListDeque.prepend(expectedLastValue);
+                doublyLinkedListDeque.prepend(expectedFirstValue);
+                Double obtainedFirstValue = (Double) doublyLinkedListDeque.first();
+                Double obtainedLastValue = (Double) doublyLinkedListDeque.last();
+                Integer size = doublyLinkedListDeque.size();
+                assertEquals(expectedFirstValue, obtainedFirstValue);
+                assertEquals(expectedLastValue, obtainedLastValue);
+                assertEquals(2, size);
+            }
 
-        // Test inserting elements at the end of the deque
-        @Test
-        void appendValue() {
-            Double expectedFirstValue = 12.7;
-            Double expectedLastValue = 83.9;
-            doublyLinkedListDeque.append(expectedFirstValue);
-            doublyLinkedListDeque.append(expectedLastValue);
-            Double obtainedLastValue = (Double) doublyLinkedListDeque.last();
-            Double obtainedFirstValue = (Double) doublyLinkedListDeque.first();
-            Integer size = doublyLinkedListDeque.size();
-            assertEquals(expectedFirstValue, obtainedFirstValue);
-            assertEquals(expectedLastValue, obtainedLastValue);
-            assertEquals(2, size);
-        }
+            // Test inserting elements at the end of the deque
+            @Test
+            void appendValue() {
+                Double expectedFirstValue = 12.7;
+                Double expectedLastValue = 83.9;
+                doublyLinkedListDeque.append(expectedFirstValue);
+                doublyLinkedListDeque.append(expectedLastValue);
+                Double obtainedLastValue = (Double) doublyLinkedListDeque.last();
+                Double obtainedFirstValue = (Double) doublyLinkedListDeque.first();
+                Integer size = doublyLinkedListDeque.size();
+                assertEquals(expectedFirstValue, obtainedFirstValue);
+                assertEquals(expectedLastValue, obtainedLastValue);
+                assertEquals(2, size);
+            }
 
-        // Test inserting a single element at the beginning of the deque
-        @Test
-        void prependValueWithOneValuePrepended() {
-            Double expectedValue = 12.7;
-            doublyLinkedListDeque.prepend(expectedValue);
-            Double obtainedFirstValue = (Double) doublyLinkedListDeque.first();
-            Double obtainedLastValue = (Double) doublyLinkedListDeque.last();
-            Integer size = doublyLinkedListDeque.size();
-            assertEquals(expectedValue, obtainedFirstValue);
-            assertEquals(expectedValue, obtainedLastValue);
-            assertEquals(1, size);
-        }
+            // Test inserting a single element at the beginning of the deque
+            @Test
+            void prependValueWithOneValuePrepended() {
+                Double expectedValue = 12.7;
+                doublyLinkedListDeque.prepend(expectedValue);
+                Double obtainedFirstValue = (Double) doublyLinkedListDeque.first();
+                Double obtainedLastValue = (Double) doublyLinkedListDeque.last();
+                Integer size = doublyLinkedListDeque.size();
+                assertEquals(expectedValue, obtainedFirstValue);
+                assertEquals(expectedValue, obtainedLastValue);
+                assertEquals(1, size);
+            }
 
-        // Test inserting a single element at the end of the deque
-        @Test
-        void appendValueWithOneValueAppended() {
-            Double expectedValue = 12.7;
-            doublyLinkedListDeque.append(expectedValue);
-            Double obtainedLastValue = (Double) doublyLinkedListDeque.last();
-            Double obtainedFirstValue = (Double) doublyLinkedListDeque.first();
-            Integer size = doublyLinkedListDeque.size();
-            assertEquals(expectedValue, obtainedLastValue);
-            assertEquals(expectedValue, obtainedFirstValue);
-            assertEquals(1, size);
+            // Test inserting a single element at the end of the deque
+            @Test
+            void appendValueWithOneValueAppended() {
+                Double expectedValue = 12.7;
+                doublyLinkedListDeque.append(expectedValue);
+                Double obtainedLastValue = (Double) doublyLinkedListDeque.last();
+                Double obtainedFirstValue = (Double) doublyLinkedListDeque.first();
+                Integer size = doublyLinkedListDeque.size();
+                assertEquals(expectedValue, obtainedLastValue);
+                assertEquals(expectedValue, obtainedFirstValue);
+                assertEquals(1, size);
+            }
         }
 
         @Nested
-        @DisplayName("Delete of DoublyLinkedListDeque")
-        class ValuesOfDoublyLinkedListDeque {
+        @DisplayName("Deletion")
+        class Deletion {
 
             // Test for deleting from an empty deque from the start
             @Test
@@ -180,45 +185,45 @@ public class DoublyLinkedListDequeTest {
                 Integer obtainedValue = doublyLinkedListDeque.size();
                 assertEquals(expectedValue, obtainedValue);
             }
+        }
 
-            // The following nested class contains tests for special cases involving terminals
-            // in a DoublyLinkedListDeque.
-            @Nested
-            @DisplayName("Terminals in special cases of DoublyLinkedListDeque")
-            class TerminalDoublyLinkedListDeque {
-                // Test that a node with no previous or next nodes is considered as first in the deque
-                @Test
-                void isFirstWithOneNode() {
-                    assertThrows(DoubleEndedQueueException.class, () -> {
-                        doublyLinkedListDeque.first();
-                    });
-                }
+        // The following nested class contains tests for special cases involving terminals
+        // in a DoublyLinkedListDeque.
+        @Nested
+        @DisplayName("Terminal checks")
+        class TerminalChecks {
+            // Test that a node with no previous or next nodes is considered as first in the deque
+            @Test
+            void isFirstWithOneNode() {
+                assertThrows(DoubleEndedQueueException.class, () -> {
+                    doublyLinkedListDeque.first();
+                });
+            }
 
-                // The following function tests the behavior of the last() function when called on a deque with only one element.
-                @Test
-                void isLastWithLastNode() {
-                    assertThrows(DoubleEndedQueueException.class, () -> {
-                        doublyLinkedListDeque.last();
-                    });
-                }
+            // The following function tests the behavior of the last() function when called on a deque with only one element.
+            @Test
+            void isLastWithLastNode() {
+                assertThrows(DoubleEndedQueueException.class, () -> {
+                    doublyLinkedListDeque.last();
+                });
+            }
 
-                // The following function tests the behavior of the first() function when called on a deque with only one element.
-                @Test
-                void getFirst() {
-                    Double expectedValue = 12.7;
-                    doublyLinkedListDeque.append(expectedValue);
-                    Double obtainedValue = (Double) doublyLinkedListDeque.first();
-                    assertEquals(expectedValue, obtainedValue);
-                }
+            // The following function tests the behavior of the first() function when called on a deque with only one element.
+            @Test
+            void getFirst() {
+                Double expectedValue = 12.7;
+                doublyLinkedListDeque.append(expectedValue);
+                Double obtainedValue = (Double) doublyLinkedListDeque.first();
+                assertEquals(expectedValue, obtainedValue);
+            }
 
-                // The following function tests the behavior of the last() function when called on a deque with only one element.
-                @Test
-                void getLast() {
-                    Double expectedValue = 12.7;
-                    doublyLinkedListDeque.append(expectedValue);
-                    Double obtainedValue = (Double) doublyLinkedListDeque.last();
-                    assertEquals(expectedValue, obtainedValue);
-                }
+            // The following function tests the behavior of the last() function when called on a deque with only one element.
+            @Test
+            void getLast() {
+                Double expectedValue = 12.7;
+                doublyLinkedListDeque.append(expectedValue);
+                Double obtainedValue = (Double) doublyLinkedListDeque.last();
+                assertEquals(expectedValue, obtainedValue);
             }
         }
     }
