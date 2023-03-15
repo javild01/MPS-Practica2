@@ -1,6 +1,7 @@
 package org.mps.deque;
 
 import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.condition.DisabledIfSystemProperties;
 
 import java.util.Comparator;
 import java.util.Objects;
@@ -44,6 +45,7 @@ public class DoublyLinkedListDequeTest {
 
             // Test inserting null at the beginning of the deque
             @Test
+            @DisplayName("The prepend method can handle null")
             void prependNull() {
                 assertThrows(DoubleEndedQueueException.class, () -> {
                     doublyLinkedListDeque.prepend(null);
@@ -52,6 +54,7 @@ public class DoublyLinkedListDequeTest {
 
             // Test inserting null at the end of the deque
             @Test
+            @DisplayName("The append method can handle null")
             void appendNull() {
                 assertThrows(DoubleEndedQueueException.class, () -> {
                     doublyLinkedListDeque.append(null);
@@ -60,6 +63,7 @@ public class DoublyLinkedListDequeTest {
 
             // Test inserting elements at the beginning of the deque
             @Test
+            @DisplayName("It prepends two values in an empty list")
             void prependValue() {
                 Double expectedFirstValue = 12.7;
                 Double expectedLastValue = 83.9;
@@ -75,6 +79,7 @@ public class DoublyLinkedListDequeTest {
 
             // Test inserting elements at the end of the deque
             @Test
+            @DisplayName("It appends two values in an empty list")
             void appendValue() {
                 Double expectedFirstValue = 12.7;
                 Double expectedLastValue = 83.9;
@@ -90,6 +95,7 @@ public class DoublyLinkedListDequeTest {
 
             // Test inserting a single element at the beginning of the deque
             @Test
+            @DisplayName("It can prepend a single value")
             void prependValueWithOneValuePrepended() {
                 Double expectedValue = 12.7;
                 doublyLinkedListDeque.prepend(expectedValue);
@@ -103,6 +109,7 @@ public class DoublyLinkedListDequeTest {
 
             // Test inserting a single element at the end of the deque
             @Test
+            @DisplayName("It can append a single value")
             void appendValueWithOneValueAppended() {
                 Double expectedValue = 12.7;
                 doublyLinkedListDeque.append(expectedValue);
@@ -121,6 +128,7 @@ public class DoublyLinkedListDequeTest {
 
             // Test for deleting from an empty deque from the start
             @Test
+            @DisplayName("It handles a deletion of first element in an empty list")
             void deleteFirstValueOfEmptyList() {
                 assertThrows(DoubleEndedQueueException.class, () -> {
                     doublyLinkedListDeque.deleteFirst();
@@ -129,6 +137,7 @@ public class DoublyLinkedListDequeTest {
 
             // Test for deleting from an empty deque from the end
             @Test
+            @DisplayName("It handles a deletion of last element in an empty list")
             void deleteLastValueOfEmptyList() {
                 assertThrows(DoubleEndedQueueException.class, () -> {
                     doublyLinkedListDeque.deleteLast();
@@ -137,6 +146,7 @@ public class DoublyLinkedListDequeTest {
 
             // Test for deleting from the start of a deque with multiple elements
             @Test
+            @DisplayName("It deletes the first element of a list")
             void deleteFirstValue() {
                 Double expectedValue = 12.7;
                 doublyLinkedListDeque.append(83.9);
@@ -152,6 +162,7 @@ public class DoublyLinkedListDequeTest {
 
             // Test for deleting from the end of a deque with multiple elements
             @Test
+            @DisplayName("It deletes the last element of a list")
             void deleteLastValue() {
                 Double expectedValue = 12.7;
                 doublyLinkedListDeque.append(83.9);
@@ -167,6 +178,7 @@ public class DoublyLinkedListDequeTest {
 
             // Test for deleting the only element in the deque from the start
             @Test
+            @DisplayName("It can delete the only value as first")
             void deleteFirstValueWithOneNode() {
                 Integer expectedValue = 0;
                 doublyLinkedListDeque.prepend(expectedValue);
@@ -178,6 +190,7 @@ public class DoublyLinkedListDequeTest {
             // The following function tests the deletion of the last element in a
             // DoublyLinkedListDeque that has only one element.
             @Test
+            @DisplayName("It can delete the only value as last")
             void deleteLastValueWithOneNode() {
                 Integer expectedValue = 0;
                 doublyLinkedListDeque.prepend(expectedValue);
@@ -194,15 +207,17 @@ public class DoublyLinkedListDequeTest {
         class TerminalChecks {
             // Test that a node with no previous or next nodes is considered as first in the deque
             @Test
+            @DisplayName("It throws an exception when there is no value as first")
             void isFirstWithOneNode() {
                 assertThrows(DoubleEndedQueueException.class, () -> {
                     doublyLinkedListDeque.first();
                 });
             }
 
-            // The following function tests the behavior of the last() function when called on a deque with only one element.
+            // The following function tests the behavior of the last() function when called on a empty deque.
             @Test
-            void isLastWithLastNode() {
+            @DisplayName("It throws an exception when there is no value as last")
+            void isLastWithOneNode() {
                 assertThrows(DoubleEndedQueueException.class, () -> {
                     doublyLinkedListDeque.last();
                 });
@@ -210,6 +225,7 @@ public class DoublyLinkedListDequeTest {
 
             // The following function tests the behavior of the first() function when called on a deque with only one element.
             @Test
+            @DisplayName("It returns the first element when it is the only one")
             void getFirst() {
                 Double expectedValue = 12.7;
                 doublyLinkedListDeque.append(expectedValue);
@@ -219,6 +235,7 @@ public class DoublyLinkedListDequeTest {
 
             // The following function tests the behavior of the last() function when called on a deque with only one element.
             @Test
+            @DisplayName("It returns the last element when it is the only one")
             void getLast() {
                 Double expectedValue = 12.7;
                 doublyLinkedListDeque.append(expectedValue);
@@ -229,6 +246,7 @@ public class DoublyLinkedListDequeTest {
     }
 
     @Nested
+    @DisplayName("Complex methods")
     // This test class groups the methods related to complex operations on the list    @DisplayName("Complex methods")
     class ComplexMethods {
         @Nested
@@ -237,6 +255,7 @@ public class DoublyLinkedListDequeTest {
 
              // This test checks that an exception is thrown when trying to access a negative index with the get method
              @Test
+             @DisplayName("It handles negative index")
              void getNegativeIndexThrowsException(){
                  assertThrows(DoubleEndedQueueException.class,()->{
                      doublyLinkedListDeque.get(-5);
@@ -245,6 +264,7 @@ public class DoublyLinkedListDequeTest {
 
             // This test verifies if an exception is thrown when trying to get an element from an empty list
             @Test
+            @DisplayName("It throws an exception when trying to get a value of empty list")
             void getElementByIndexWithEmptyList() {
                 assertThrows(DoubleEndedQueueException.class, () -> {
                     assertNull(doublyLinkedListDeque.get(5));
@@ -253,6 +273,7 @@ public class DoublyLinkedListDequeTest {
 
             // This test verifies if the correct value is obtained when getting an element from a list with a single element
             @Test
+            @DisplayName("It can get the single value of a list")
             void getElementByIndexInList() {
                 doublyLinkedListDeque.append(0);
                 int expectedValue = 0;
@@ -262,6 +283,7 @@ public class DoublyLinkedListDequeTest {
 
             // This test verifies if an exception is thrown when trying to get an element that is not in the list
             @Test
+            @DisplayName("It throws an exception when trying to get a value out of bounds")
             void getElementByIndexNotInList() {
                 doublyLinkedListDeque.append(8);
                 doublyLinkedListDeque.append(0);
@@ -277,12 +299,12 @@ public class DoublyLinkedListDequeTest {
 
             // This test checks that the first element is removed
             @Test
+            @DisplayName("Remove the first element of a bunch")
             void removesFirstElement(){
                 doublyLinkedListDeque.append(9);
                 doublyLinkedListDeque.append(2.3);
                 doublyLinkedListDeque.append(15.4);
                 doublyLinkedListDeque.append(4.7);
-
                 double expectedFirstElement = 2.3;
                 double expectedLastElement = 4.7;
                 doublyLinkedListDeque.remove(9);
@@ -293,22 +315,22 @@ public class DoublyLinkedListDequeTest {
             // This test verifies that an element that is the last but not the first is correctly removed
             // (if it were a list with a single element, then that element would be first and last at the same time)
             @Test
-            void removesLastButNotFirstElement(){
+            @DisplayName("Removes the last value when is the only coincidence")
+            void removesLastElement(){
                 doublyLinkedListDeque.append(9.0);
                 doublyLinkedListDeque.append(2.3);
                 doublyLinkedListDeque.append(15.4);
                 doublyLinkedListDeque.append(4.7);
-
                 doublyLinkedListDeque.remove(4.7);
                 double expectedFirstElement = 9;
                 double expectedLastElement = 15.4;
-
                 assertEquals(expectedFirstElement,doublyLinkedListDeque.first());
                 assertEquals(expectedLastElement,doublyLinkedListDeque.last());
             }
 
             // This test verifies if no exception is thrown when trying to remove an element from an empty list
             @Test
+            @DisplayName("It does not throw an exception when the value is not contained")
             void removeElementInEmptyList() {
                 assertDoesNotThrow(() -> {
                     doublyLinkedListDeque.remove(1);
@@ -318,6 +340,7 @@ public class DoublyLinkedListDequeTest {
             // This test verifies if the only element of a list is correctly removed and
             // if an exception is thrown when trying to access the first element of the empty list
             @Test
+            @DisplayName("It removes the only element of a list")
             void removeElementInListWithOneElement() {
                 doublyLinkedListDeque.append(1);
                 doublyLinkedListDeque.remove(1);
@@ -328,6 +351,7 @@ public class DoublyLinkedListDequeTest {
 
             // This test verifies if it does not modify the list when trying to remove an element that is not in the list with a single element and if the size of the list remains unchanged
             @Test
+            @DisplayName("It does not remove an element when not contained in a one element list")
             void removeElementNotContainedInListWithOneElement() {
                 doublyLinkedListDeque.append(3);
                 doublyLinkedListDeque.remove(1);
@@ -338,16 +362,17 @@ public class DoublyLinkedListDequeTest {
 
             // This test verifies if it correctly removes an element that is in the list and if it updates correctly both size and values of nodes
             @Test
+            @DisplayName("It removes the first coincidence of a bunch")
             void removeElementInList() {
                 doublyLinkedListDeque.append(3);
+                doublyLinkedListDeque.append(7);
                 doublyLinkedListDeque.append(2);
                 doublyLinkedListDeque.append(7);
-                doublyLinkedListDeque.append(9);
                 doublyLinkedListDeque.remove(7);
                 int expectedValueOfSize = 3;
                 int obtainedValueOfSize = doublyLinkedListDeque.size();
                 assertEquals(expectedValueOfSize, obtainedValueOfSize);
-                int expectedValueOfNode = 9;
+                int expectedValueOfNode = 7;
                 int obtainedValueOfNode = (int)doublyLinkedListDeque.get(2);
                 assertEquals(expectedValueOfNode, obtainedValueOfNode);
             }
@@ -355,6 +380,7 @@ public class DoublyLinkedListDequeTest {
             // This test verifies if the list is not modified when trying to delete an element which isn´t on the list and if the size and values of the list
             //remain the same
             @Test
+            @DisplayName("It does not remove an element when not contained")
             void removeElementNotContainedInList() {
                 doublyLinkedListDeque.append(3);
                 doublyLinkedListDeque.append(2);
@@ -375,12 +401,14 @@ public class DoublyLinkedListDequeTest {
         class ContainsMethod {
             // Este test verifica si una lista vacía no contiene ningún valor
             @Test
+            @DisplayName("It knows it cannot contain a value when empty")
             void emptyListDoesNotContainValue() {
                 assertFalse(doublyLinkedListDeque.contains(9.3));
             }
 
             // Este test verifica si una lista con un solo elemento contiene ese elemento
             @Test
+            @DisplayName("It can tell if a single element is the one")
             void oneElementListDoesContainValue() {
                 doublyLinkedListDeque.append(9.3);
                 assertTrue(doublyLinkedListDeque.contains(9.3));
@@ -388,6 +416,7 @@ public class DoublyLinkedListDequeTest {
 
             // Este test verifica si una lista con un solo elemento no contiene otro elemento distinto
             @Test
+            @DisplayName("It can tell if a single element is not the one")
             void oneElementListDoesNotContainValue() {
                 doublyLinkedListDeque.append(9.1);
                 assertFalse(doublyLinkedListDeque.contains(9.3));
@@ -395,6 +424,7 @@ public class DoublyLinkedListDequeTest {
 
             // Este test verifica si una lista con varios elementos iguales contiene ese elemento
             @Test
+            @DisplayName("It can tell if a value is in a bunch of values")
             void listDoesContainValue() {
                 doublyLinkedListDeque.append(9.3);
                 doublyLinkedListDeque.append(9.3);
@@ -405,6 +435,7 @@ public class DoublyLinkedListDequeTest {
 
             // Este test verifica que una lista no contiene un elemento que no se ha añadido
             @Test
+            @DisplayName("It can tell if a value is not in a bunch of values")
             void listDoesNotContainValue() {
                 doublyLinkedListDeque.append(9.1);
                 doublyLinkedListDeque.append(9.3);
@@ -422,6 +453,7 @@ public class DoublyLinkedListDequeTest {
 
             // This test verifies that after sorting an empty list, the size is still zero
             @Test
+            @DisplayName("A empty list can be sorted")
             void sortEmptyList() {
                 doublyLinkedListDeque.sort(Comparator.comparingInt(Integer::intValue));
                 assertEquals(doublyLinkedListDeque.size(),0);
@@ -429,6 +461,7 @@ public class DoublyLinkedListDequeTest {
 
             // This test verifies if you can sort a list with a single element without modifying it
             @Test
+            @DisplayName("It can sort a single value")
             void sortOneElementList() {
                 doublyLinkedListDeque.append(8);
                 doublyLinkedListDeque.sort(Comparator.comparingInt(Integer::intValue));
@@ -439,6 +472,7 @@ public class DoublyLinkedListDequeTest {
 
             // This test verifies if you can sort a list with two elements in ascending order
             @Test
+            @DisplayName("It can sort to values")
             void sortTwoElementList() {
                 doublyLinkedListDeque.append(8);
                 doublyLinkedListDeque.append(5);
@@ -453,6 +487,7 @@ public class DoublyLinkedListDequeTest {
 
             // This test verifies if you can sort a list with several elements in ascending order and if the values of the list correspond to those expected
             @Test
+            @DisplayName("It can sort a bunch of values")
             void sortList() {
                 doublyLinkedListDeque.append(5);
                 doublyLinkedListDeque.append(8);
