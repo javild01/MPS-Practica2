@@ -247,7 +247,7 @@ public class DoublyLinkedListDequeTest {
 
     @Nested
     @DisplayName("Complex methods")
-    // This test class groups the methods related to complex operations on the list    @DisplayName("Complex methods")
+    // This test class groups the methods related to complex operations on the list
     class ComplexMethods {
         @Nested
         @DisplayName("Get Method")
@@ -349,7 +349,8 @@ public class DoublyLinkedListDequeTest {
                 });
             }
 
-            // This test verifies if it does not modify the list when trying to remove an element that is not in the list with a single element and if the size of the list remains unchanged
+            // This test verifies if it does not modify the list when trying to remove an element that
+            // is not in the list with a single element and if the size of the list remains unchanged
             @Test
             @DisplayName("It does not remove an element when not contained in a one element list")
             void removeElementNotContainedInListWithOneElement() {
@@ -360,7 +361,8 @@ public class DoublyLinkedListDequeTest {
                 assertEquals(expectedValue, obtainedValue);
             }
 
-            // This test verifies if it correctly removes an element that is in the list and if it updates correctly both size and values of nodes
+            // This test verifies if it correctly removes an element that is in the list and
+            // if it updates correctly both size and values of nodes
             @Test
             @DisplayName("It removes the first coincidence of a bunch")
             void removeElementInList() {
@@ -377,7 +379,7 @@ public class DoublyLinkedListDequeTest {
                 assertEquals(expectedValueOfNode, obtainedValueOfNode);
             }
 
-            // This test verifies if the list is not modified when trying to delete an element which isn´t on the list and if the size and values of the list
+            // This test verifies if the list is not modified when trying to delete an element which isn't on the list and if the size and values of the list
             //remain the same
             @Test
             @DisplayName("It does not remove an element when not contained")
@@ -399,14 +401,14 @@ public class DoublyLinkedListDequeTest {
         @Nested
         @DisplayName("Contains Method")
         class ContainsMethod {
-            // Este test verifica si una lista vacía no contiene ningún valor
+            // This test verifies that an empty list doesn't contain any value
             @Test
             @DisplayName("It knows it cannot contain a value when empty")
             void emptyListDoesNotContainValue() {
                 assertFalse(doublyLinkedListDeque.contains(9.3));
             }
 
-            // Este test verifica si una lista con un solo elemento contiene ese elemento
+            // This test verifies if a list with a single element contains that element
             @Test
             @DisplayName("It can tell if a single element is the one")
             void oneElementListDoesContainValue() {
@@ -414,7 +416,7 @@ public class DoublyLinkedListDequeTest {
                 assertTrue(doublyLinkedListDeque.contains(9.3));
             }
 
-            // Este test verifica si una lista con un solo elemento no contiene otro elemento distinto
+            // This test verifies if a list with a single element doesn't contain another different element
             @Test
             @DisplayName("It can tell if a single element is not the one")
             void oneElementListDoesNotContainValue() {
@@ -422,7 +424,7 @@ public class DoublyLinkedListDequeTest {
                 assertFalse(doublyLinkedListDeque.contains(9.3));
             }
 
-            // Este test verifica si una lista con varios elementos iguales contiene ese elemento
+            // This test verifies if a list with repeated elements contains that element
             @Test
             @DisplayName("It can tell if a value is in a bunch of values")
             void listDoesContainValue() {
@@ -433,7 +435,7 @@ public class DoublyLinkedListDequeTest {
                 assertTrue(doublyLinkedListDeque.contains(9.3));
             }
 
-            // Este test verifica que una lista no contiene un elemento que no se ha añadido
+            // This test verifies that a list doesn't contain an element that hasn't been added
             @Test
             @DisplayName("It can tell if a value is not in a bunch of values")
             void listDoesNotContainValue() {
@@ -485,7 +487,8 @@ public class DoublyLinkedListDequeTest {
                 assertEquals(expectedSecondValue, obtainedSecondValue);
             }
 
-            // This test verifies if you can sort a list with several elements in ascending order and if the values of the list correspond to those expected
+            // This test verifies if you can sort a list with several elements in ascending order and
+            // if the values of the list correspond to those expected
             @Test
             @DisplayName("It can sort a bunch of values")
             void sortList() {
